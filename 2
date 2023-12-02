@@ -1,0 +1,68 @@
+<!-- Buuton which reacts on hover part of javascristmas task -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --font-family: 'Karla', sans-serif;
+            --body-bg: #1E1F25;
+            --btn-bg: #000;
+            --btn-color: #cbcbcb;
+            --btn-color-hover: #fff;
+            --grad-color1: #eeaf61;
+            --grad-color2: #fb9062;
+            --grad-color3: #ee5d6c;
+            --grad-color4: #ce4993;
+            --grad-color5: #6a0d83;
+        }
+
+        .button-border {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #1E1F25;
+        }
+
+        .button {
+            padding: 1em 2em;
+            color: #cbcbcb;
+            position: relative;
+            display: inline-block;
+            font-size: 1.5rem;
+            background: linear-gradient(#000, #000) padding-box, linear-gradient(115deg, #eeaf61, #6a0d83) border-box;
+            border: 3px solid transparent;
+        }
+
+        .button:hover {
+            background-position: right bottom;
+            color: #fff;
+            transform: scale(1.05);
+            background: linear-gradient(#000, #000) padding-box, linear-gradient(-115deg, #eeaf61, #6a0d83) border-box;
+            font-weight: bold
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="button-border">
+            <button type="button" class="button">
+                Christmas is Coming
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
