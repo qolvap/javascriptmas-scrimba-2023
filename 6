@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secret Santa Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #007bb5;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Secret Santa Assignment</h2>
+<button onclick="generateAndDisplay()">Generate Secret Santa Pairs</button>
+<p id="result"></p>
+
+<script>
+  const people = ["Alice", "Bob", "Carly", "Dan", "Ed", "Ferdinand", "Ginny"];
+
+  function generateSecretSantaPairs(arr) {
+    const shuffledArr = [...arr].sort(() => Math.random() - 0.5);
+
+    const pairs = {};
+    for (let i = 0; i < arr.length; i++) {
+      pairs[arr[i]] = shuffledArr[(i + 1) % arr.length];
+    }
+
+    return pairs;
+  }
+
+  function generateAndDisplay() {
+    const resultElement = document.getElementById("result");
+    const secretSantaPairs = generateSecretSantaPairs(people);
+
+    // Display the result on the page
+    let resultString = "Secret Santa Pairs:<br>";
+    for (const person in secretSantaPairs) {
+      resultString += `${person}: ${secretSantaPairs[person]}<br>`;
+    }
+
+    resultElement.innerHTML = resultString;
+    console.log(secretSantaPairs);
+  }
+</script>
+
+</body>
+</html>
