@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Wishlist</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .wishlist {
+            margin-top: 20px;
+            border: round solid red;
+        }
+
+        .wishlist-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .delete-btn {
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wish List:</h1>
+    <div>
+        <input type="text" id="newItem" placeholder="What`s Your wish?">
+        <button onclick="addItem()">+</button>
+    </div>
+    <div class="wishlist">
+    </div>
+    <script>
+        const wishlist = [
+            "Font-End developer path",
+            "JavaScript",
+            "Typescript",
+            "React"
+        ];
+
+        function renderWishlist() {
+            const wishlistContainer = document.querySelector('.wishlist');
+            wishlistContainer.innerHTML = '';
+
+            wishlist.forEach((item, index) => {
+                const wishlistItem = document.createElement('div');
+                wishlistItem.classList.add('wishlist-item');
+
+                const itemName = document.createElement('span');
+                itemName.textContent = item;
+
+                const deleteBtn = document.createElement('span');
+                deleteBtn.textContent = '-';
+                deleteBtn.classList.add('delete-btn');
+                deleteBtn.addEventListener('click', () => removeItem(index));
+
+                wishlistItem.appendChild(itemName);
+                wishlistItem.appendChild(deleteBtn);
+                wishlistContainer.appendChild(wishlistItem);
+            });
+        }
+
+        function addItem() {
+            const newItemInput = document.getElementById('newItem');
+            const newItem = newItemInput.value.trim();
+
+            if (newItem) {
+                wishlist.push(newItem);
+                renderWishlist();
+                newItemInput.value = '';
+            }
+        }
+
+        function removeItem(index) {
+            wishlist.splice(index, 1);
+            renderWishlist();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderWishlist);
+    </script>
+</body>
+</html>
