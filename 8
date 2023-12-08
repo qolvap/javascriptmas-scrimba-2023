@@ -1,0 +1,71 @@
+<!-- Loading bar with changing colors in progress -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Background Color</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: whitesmoke;
+        }
+
+        :root {
+            --progressbar-bg: lightgrey;
+            --start: #F70000;
+            --middle: #005EAA;
+            --finish: #509800;
+        }
+
+        .container {
+            width: 350px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: lightgrey;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-status {
+            height: 100%;
+            animation: progressAnimation 20s linear infinite; /* Змінено на 20 секунд для сповільнення */
+        }
+
+        @keyframes progressAnimation {
+            0% {
+                background-color: #F70000;
+                width: 0;
+            }
+            50% {
+                background-color: #005EAA;
+            }
+            70% {
+                width: 100%;
+            }
+            100% {
+                background-color: #509800;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-bar progress-status"></div>
+        </div>
+    </div>
+</body>
+</html>
