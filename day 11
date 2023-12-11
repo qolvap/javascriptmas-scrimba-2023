@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switzerland Flag</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    :root { 
+      --white: #fff;
+      --red: #FF0002;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .flag-swiss {
+      background-color: #FF0002;
+      margin: auto;
+      height: 100px;
+      width: 100px;
+      overflow: hidden;
+    }
+
+    .cross1,
+    .cross2 {
+      position: absolute;
+      background-color: #fff;
+      display: block;
+    }
+
+    .cross1 {
+      margin-top: 12.5px;
+      height: 75px;
+      width: 20px;
+      margin-left: 40px;
+    }
+
+    .cross2 {
+      width: 75px;
+      height: 20px;
+      margin-left: 12.5px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="flag-swiss">
+    <div class="cross cross1"></div>
+    <div class="cross cross2"></div>
+  </div>
+</body>
+</html>
