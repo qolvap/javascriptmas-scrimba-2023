@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Gifts</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body style="background-image: url('/bg-xmas.png'); background-size: cover; background-repeat: no-repeat">
+
+  <script>
+    <!--  Array of Christmas gifts  -->
+    const xmasGifts = ['guitar 🎸', 'skates ⛸️', 'bear 🧸', 'magnet 🧲', 'laptop 💻', 'games console 🎮 ', 'jewellery 💍', 'kite 🪁']
+
+<!-- /**
+     * Challenge:
+     * 1. Sort the array twice. Alphabetically and reverse alphabetically.  
+     **/ -->
+
+    <!--  Sorting the array alphabetically  -->
+    const sortedAZ = xmasGifts.slice().sort();
+    console.log('A-Z: ', sortedAZ) 
+   <!--  Output: ["bear 🧸", "games console 🎮 ", "guitar 🎸", "jewellery 💍", "kite 🪁", "laptop 💻", "magnet 🧲", "skates ⛸️"]  -->
+
+   <!-- Sorting the array in reverse alphabetical order  -->
+    const sortedZA = xmasGifts.slice().sort().reverse();
+    console.log('Z-A: ', sortedZA) 
+    <!--  Output: ["skates ⛸️", "magnet 🧲", "laptop 💻", "kite 🪁", "jewellery 💍", "guitar 🎸", "games console 🎮 ", "bear 🧸"]   -->
+  </script>
+</body>
+</html>
