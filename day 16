@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>🎅 Naughty List, Nice List 🎁</title>
+    <style>
+        :root {
+            --wine-red: #C7375F;
+            --dark-green: #344D2F;
+            --snow: #F0F4F7;
+            --gold: #FAC57D;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: var(--dark-green);
+            background-color: var(--snow);
+        }
+
+        h1 {
+            color: var(--dark-green);
+        }
+
+        .container,
+        .list {
+            display: flex;
+            justify-content: center;
+            align-items:  center;
+        }
+
+        .list {
+            margin: 0 1em 1em;
+            flex-direction: column;
+            width: 200px;
+            height: 200px;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+            color: var(--snow);
+            font-size: 30px;
+            list-style-type: none;
+        }
+
+        .nice-list {
+            background: var(--dark-green);
+        }
+
+        .naughty-list {
+            background: var(--wine-red);
+        }
+
+        button {
+            padding: 1em 2em;
+            border: none;
+            font-size: 1.2rem;
+            background-color: var(--gold);
+            color: var(--dark-green);
+            font-weight: 700;
+            border-radius: 999px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        }
+
+        button:hover {
+            cursor: pointer;
+            transform: scale(1.03)
+        }
+    </style>
+</head>
+<body>
+    <h1>🎅 Naughty List, Nice List 🎁</h1>
+    <div class="container">
+        <div>
+            <h2>Nice List</h2>
+            <ul class="list nice-list" id="nice-list"></ul>
+        </div>
+        <div>
+            <h2>Naughty List</h2>
+            <ul class="list naughty-list" id="naughty-list"></ul>
+        </div>
+    </div>
+    <button id="btn" type="button">Sort</button>
+    <script>
+        const niceList = document.getElementById("nice-list");
+        const naughtyList = document.getElementById("naughty-list");
+        const btn = document.getElementById("btn");
+
+        const sorteesArr = [
+            {
+                name: "David",
+                hasBeenGood: false
+            },
+            {
+                name: "Del",
+                hasBeenGood: true
+            },
+            {
+                name: "Valerie",
+                hasBeenGood: false
+            },
+            {
+                name: "Astrid",
+                hasBeenGood: true
+            }
+        ];
+
+        btn.addEventListener("click", () => sort(sorteesArr));
+
+        function filterByGoodness(arr, isGood) {
+            return arr.filter(person => person.hasBeenGood === isGood);
+        }
+
+        function displayPeople(people, list) {
+            list.innerHTML = people.map(person => `<span>${person.name}</span>`).join("");
+        }
+
+        function sort(arr) {
+            const naughtyPeople = filterByGoodness(arr, false);
+            const nicePeople = filterByGoodness(arr, true);
+
+            displayPeople(naughtyPeople, naughtyList);
+            displayPeople(nicePeople, niceList);
+        }
+    </script>
+</body>
+</html>
