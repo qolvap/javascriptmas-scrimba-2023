@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>I love <span id="dos"></span></h1>
+        </div>
+    </body>
+</html>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --bg-word: #5134ff;
+    }
+
+    .container {
+        margin: 7rem 7rem;
+    }
+
+    #dos {
+        position: relative; 
+        animation: animate 5s linear infinite;
+        background-color: #5134ff;
+        padding: 15px;
+        border-radius: 15px;
+        color: #fff;
+    }
+
+    #dos:after {
+        content: "Scrimba";
+        animation: animate 5s linear infinite;
+        position: absolute; 
+        top: 100%; 
+        left: 0;
+    }
+
+    @keyframes animate {
+        0% { content: 'coding';}
+        25% {content: 'reading';}
+        50% {content: 'cycling';}
+        75% {content: 'football';}
+        100% {content: 'Scrimba';}
+    }
+</style>
