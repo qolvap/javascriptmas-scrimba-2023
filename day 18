@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas E-card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --radius: 3px;
+            --main-color: #5D3FD3;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url('/xmas-bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            background-color: blue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--main-color);
+        }
+
+        main {
+            display: flex;
+            box-shadow: 3px 3px 10px 1px #666;
+            border-radius: var(--radius);
+            position: relative;
+        }
+
+        section {
+            width: 256px;
+            height: 256px;
+            text-align: center;
+            background-color: white;
+            padding: 1em;
+        }
+
+        .right-col {
+            border-top-right-radius: var(--radius);
+            border-bottom-right-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courgette';
+        }
+
+        .left-col {
+            border-top-left-radius: var(--radius);
+            border-bottom-left-radius: var(--radius);
+        }
+
+        img {
+            border-radius: var(--radius);
+            width: 256px;
+        }
+
+        dialog {
+            border: none;
+            border-radius: var(--radius);
+            box-shadow: 3px 3px 10px 1px #666;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2em;
+            width: 300px;
+        }
+
+        .form-inner {
+            display: flex;
+        }
+
+        label {
+            font-family: 'Roboto';
+            display: block;
+            text-align: center;
+            margin: 0 auto 1em auto;
+            padding: 0 .2em;
+            font-size: 140%;
+        }
+
+        textarea {
+            resize: none;
+            border-right: none;
+            border: 1px solid #999;
+            border-top-left-radius: var(--radius);
+            border-bottom-left-radius: var(--radius);
+            height: 3em;
+            padding: .3em;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        button {
+            background-color: var(--main-color);
+            border: none;
+            color: white;
+            border-top-right-radius: var(--radius);
+            border-bottom-right-radius: var(--radius);
+            padding: 0 .6em;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        .btn-send {
+            width: 25px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="left-col" id="image-container">
+            <img src="/placeholder-image.png">
+        </section>
+        <section class="right-col">
+            <h1>Merry Christmas!!</h1>
+            <h2>And all the best for 2024</h2>
+            <p>Love Tom</p>
+        </section>
+        <dialog id="dialog-modal">
+            <form>
+                <label>Describe a Christmassy image for your e-card 🎄</label>
+                <div class="form-inner">
+                    <textarea placeholder="A winter scene..." id="user-input"></textarea>
+                    <button type="submit"><img src="send.svg" class="btn-send"></button>
+                </div>
+            </form>
+        </dialog>
+    </main>
+    <script type="module">
+        import { HfInference } from '@huggingface/inference';
+        const hf = new HfInference();
+
+        const dialogModal = document.getElementById('dialog-modal');
+
+        // Замість dialogModal.show()
+        dialogModal.classList.add('show');
+
+        document.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const imageDescription = document.getElementById('user-input').value;
+
+            // Замість dialogModal.close()
+            dialogModal.classList.remove('show');
+
+            try {
+                const imageUrl = await generateImage(imageDescription);
+                const altText = await generateAltText(imageUrl);
+                renderImage(imageUrl, altText);
+            } catch (error) {
+                console.error('Failed to generate alt text:', error);
+            }
+        });
+
+        async function generateImage(imageToGenerate) {
+            const response = await hf.textToImage({
+                inputs: imageToGenerate,
+                model: "stabilityai/stable-diffusion-2",
+            });
+
+            return blobToBase64(response);
+        }
+
+        async function generateAltText(imageUrl) {
+            try {
+                const response = await hf.imageToText({
+                    data: await (await fetch(imageUrl)).blob(),
+                    model: "Salesforce/blip-image-captioning-base",
+                });
+
+                return response.generated_text;
+            } catch (error) {
+                console.error('Failed to generate alt text:', error);
+                return null;
+            }
+        }
+
+        function renderImage(imageUrl, altText) {
+            console.log(altText);
+
+            const imageContainer = document.getElementById('image-container');
+            imageContainer.innerHTML = '';
+
+            const image = document.createElement('img');
+            image.src = imageUrl;
+            image.alt = altText;
+
+            imageContainer.appendChild(image);
+        }
+
+        async function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+    </script>
+</body>
+
+</html>
