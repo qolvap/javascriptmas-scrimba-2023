@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Santa</title>
+    <script src="index.pack.js" defer></script>
+</head>
+<body>
+    <script>
+        const dangerArray = [
+            ["🎅", "👺"],
+            [
+                ["🎅", "🦁"],
+                ["👹", "🎅"]
+            ],
+            [
+                [
+                    ["🎅", "🐻"],
+                    ["🧌", "🎅"]
+                ],
+                [
+                    ["🐯", "🎅"],
+                    ["🎅", "😈"]
+                ]
+            ]
+        ];
+
+        function saveSanta(arr) {
+            // Flatten the array using Array.prototype.flat()
+            const flatArray = arr.flat(Infinity);
+
+            // Filter only the "🎅" emoji
+            const santasOnly = flatArray.filter(emoji => emoji === "🎅");
+
+            return santasOnly;
+        }
+
+        // Check the returned results from saveSanta()
+        console.log(saveSanta(dangerArray));
+    </script>
+</body>
+</html>
