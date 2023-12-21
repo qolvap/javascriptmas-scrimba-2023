@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar</title>
+    <style>
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --search-border: #bbb;
+            --search-focus-border: #3a71ca;
+        }
+
+        .container {
+            padding: 5px 20px;
+            width: 300px;
+        }
+
+        .search-bar {
+            border: 2px solid var(--search-border);
+            border-radius: 5px;
+            margin: 1em;
+            width: 30%;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:hover {
+            border: 2px solid var(--search-focus-border);
+        }
+
+        .search-bar:focus {
+            border: 2px solid var(--search-focus-border);
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        input:focus::placeholder {
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="search" class="search-bar" id="search-field" placeholder="Search..." />
+    </div>
+</body>
+
+</html>
