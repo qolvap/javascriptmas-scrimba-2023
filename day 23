@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Switch</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #C6C8DB;
+        }
+
+        :root {
+            --toggle-switch-bg: #232428;
+            --toggle-border: #232428;
+            --toggle-bg: #fff;
+        }
+
+        .toggle-wrap {
+            position: relative;
+            width: 100px;
+            height: 45px;
+            padding: 5px;
+        }
+
+        .toggle-input {
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-switch {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fff;
+            border: 2px solid #232428;
+            border-radius: 50px;
+            transition: background-color 0.2s;
+        }
+
+        .toggle-switch::before {
+            position: absolute;
+            content: "";
+            height: 40px;
+            width: 40px;
+            left: 5px;
+            bottom: 5px;
+            background-color: #232428;
+            transition: transform 0.2s;
+            border-radius: 50%;
+        }
+
+        .toggle-input:checked + .toggle-switch::before {
+            transform: translateX(50px);
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle-wrap">
+        <label for="toggle">
+            <input type="checkbox" id="toggle" class="toggle-input"></input>
+            <div class="toggle-switch"></div>
+        </label>
+    </div>
+</body>
+</html>
